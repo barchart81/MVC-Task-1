@@ -1,0 +1,179 @@
+package javaapplication2.Controller;
+import javaapplication2.Model.Model;
+import javaapplication2.Model.Student;
+import javaapplication2.View.View;
+
+/**
+ *
+ * @author fa22-bse-129
+ */
+public class Controller {
+    private Model model;
+    private View view;
+
+    // Constructor to initialize model and view
+    public Controller(Model model, View view) {
+        this.model = model;
+        this.view = view;
+    }
+
+    // Method to add a student to the model
+    public void addStudentToModel(int index, String name, String registrationNumber, double gpa) {
+        model.addStudent(index, name, registrationNumber, gpa);
+    }
+
+    // Method to get the list of students from the model
+    public Student[] getStudentsFromModel() {
+        return model.getStudents();
+    }
+
+    // Method to update the view with student data
+    public void updateView() {
+        view.printStudentDetails(model.getStudents());
+    }
+}
+----------------------------------------------------------------------------
+Model Package
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication2.Model;
+
+/**
+ *
+ * @author fa22-bse-129
+ */
+public class Model {
+    private Student[] students;  // Array to store students
+
+    // Constructor to initialize the array
+    public Model() {
+        students = new Student[10];  // We are storing 10 students
+    }
+
+    // Method to add a student to the array
+    public void addStudent(int index, String name, String registrationNumber, double gpa) {
+        students[index] = new Student(name, registrationNumber, gpa);
+    }
+
+    // Method to get all students
+    public Student[] getStudents() {
+        return students;
+    }
+}
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication2.Model;
+
+/**
+ *
+ * @author fa22-bse-129
+ */
+public class Student {
+    private String name;
+    private String registrationNumber;
+    private double gpa;
+
+    // Constructor
+    public Student(String name, String registrationNumber, double gpa) {
+        this.name = name;
+        this.registrationNumber = registrationNumber;
+        this.gpa = gpa;
+    }
+
+    // Getters and Setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
+    }
+
+    // ToString method for displaying student data
+    @Override
+    public String toString() {
+        return "Name: " + name + ", Registration: " + registrationNumber + ", GPA: " + gpa;
+    }
+}
+----------------------------------------------------------------------------
+
+
+package javaapplication2.View;
+import javaapplication2.Model.Student;
+/**
+ *
+ * @author fa22-bse-129
+ */
+public class View {
+    // Method to display all students
+    public void printStudentDetails(Student[] students) {
+        for (Student student : students) {
+            if (student != null) {
+                System.out.println(student);
+            }
+        }
+    }
+}
+----------------------------------------------------------------------------
+
+package javaapplication2;
+import javaapplication2.Controller.Controller;
+import javaapplication2.Model.Model;
+import javaapplication2.View.View;
+
+/**
+ *
+ * @author fa22-bse-129
+ */
+public class JavaApplication2 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Model model = new Model();
+        View view = new View();
+        Controller controller = new Controller(model, view);
+
+        // Add 10 students to the model
+        controller.addStudentToModel(0, "Yousaf", "113", 3.1);
+        controller.addStudentToModel(1, "Aqib", "512", 2.5);
+        controller.addStudentToModel(2, "john", "256", 4);
+        controller.addStudentToModel(3, "zeeshan", "1024", 2.2);
+        controller.addStudentToModel(4, "hamza", "128", 3.4);
+        controller.addStudentToModel(5, "noman", "115", 2.8);
+        controller.addStudentToModel(6, "faraz", "234", 2.4);
+        controller.addStudentToModel(7, "alayan", "911", 3.2);
+        controller.addStudentToModel(8, "sarmad", "111", 2.34);
+        controller.addStudentToModel(9, "usman", "241", 2.66);
+
+        // Update the view to display the students' details
+        controller.updateView();
+    }
+}
+    
