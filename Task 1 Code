@@ -1,0 +1,59 @@
+public class Controller {
+    private Model model;
+    private View view;
+    
+ public Controller(Model model, View view) {
+        this.model = model;
+        this.view = view;
+ }
+ 
+ public void setData(String data) {
+        model.setData(data);
+ }
+public String getData() {
+        return model.getData();
+}
+public void updateView() {
+        view.printData(model.getData());
+ }
+}
+
+---------------------------------------------------------
+
+public class Model {
+        private String data;
+        public String getData() {
+        return data;
+ }
+ 
+public void setData(String data) {
+        this.data = data;
+ }
+}
+-------------------------------------------------------
+
+public class View {
+ public void printData(String data) {
+ System.out.println("Data: " + data);
+ }
+}
+
+-------------------------------------------------------
+
+public class JavaApplication1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+
+            Model model = new Model();
+            View view = new View();
+            Controller controller = new Controller(model, view);
+
+            controller.setData("Hello, MVC Pattern!");
+            controller.updateView();
+    }
+    
+}
